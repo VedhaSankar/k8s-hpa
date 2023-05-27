@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-hpa
+spec:
+  selector:
+    matchLabels:
+      app: k8s-hpa
+  template:
+    metadata:
+      labels:
+        app: k8s-hpa
+    spec:
+      containers:
+        - name: k8s-hpa
+          image: flask-test-app:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 4001
+          imagePullPolicy: IfNotPresent
